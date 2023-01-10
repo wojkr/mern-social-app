@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const UserSchema = new mongoose.Schema({
+const UserSchema = mongoose.Schema({
     firstName: {
         type: String,
         required: true,

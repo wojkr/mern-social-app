@@ -2,3 +2,5 @@ access.txt
 .env
 /node_modules
 README.md
+/public 
+/data

@@ -10,6 +10,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 import { register } from "./controllers/auth.js"
+import authRoutes from ".routes/auth.js"
 
 // CONFIGURATION
 const __filename = fileURLToPath(import.meta.url);
@@ -23,7 +24,7 @@ app.use(morgan("common"))
 app.use(express.urlencoded({ extended: true, limit: "30mb" })); // for parsing application/x-www-form-urlencoded
 app.use(express.json({ extended: true, limit: "30mb" }));
 app.use(cors());
-app.use("/assets", express.static(path.join(__dirname, "public/assets")))
+app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
 // FILE STORAGE
 const storage = multer.diskStorage({
@@ -32,11 +33,14 @@ const storage = multer.diskStorage({
     }, filename: function (req, file, cb) {
         cb(null, file.originalname)
     }
-})
-const upload = multer({ storage })
+});
+const upload = multer({ storage });
 
 //ROUTES WITH FILES
 app.post("/auth/register", upload.single("picture"), register);
+
+//ROUTES 
+app.use("/auth", authRoutes);
 
 // MONGOOSE SETUP
 const PORT = process.env.PORT || 6001;

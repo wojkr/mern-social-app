@@ -4,6 +4,7 @@ import User from "../models/User.js";
 
 //REGISTER USER
 export const register = async (req, res) => {
+    console.log('/controllers/auth.js')
     try {
         const {
             firstName,
@@ -15,6 +16,7 @@ export const register = async (req, res) => {
             location,
             occupation
         } = req.body;
+        console.log(req.body)
         const salt = await bcrypt.genSalt();
         const passwordHash = await bcrypt.hash(password, salt)
         const newUser = new User({
@@ -39,6 +41,7 @@ export const register = async (req, res) => {
 
 //LOGGING IN
 export const login = async (req, res) => {
+    console.log('/controllers/auth.js')
     try {
         const { email, password } = req.body;
         const user = await User.findOne({ email: email });

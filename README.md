@@ -8,3 +8,15 @@ Fulstack social media 'rokku' platform
 MONGO_URL=< your connection string >
 
 PORT=< port number >
+
+
+
+## Get started
+
+### Server
+
+In terminal go to folder *server* and type `npm run start`
+
+### Client
+
+In terminal go to folder *client* and type `npm run start`

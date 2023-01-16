@@ -64,12 +64,12 @@ export const likePost = async (req, res) => {
             post.likes.set(userId, true)
         }
 
-        console.log('Updating posts Disabled. In controllers/posts.js')
-        // const updatedPost = await Post.findByIdAndUpdate(
-        //     id,
-        //     { likes: post.likes },
-        //     { new: true }
-        // )
+        // console.log('Updating posts Disabled. In controllers/posts.js')
+        const updatedPost = await Post.findByIdAndUpdate(
+            id,
+            { likes: post.likes },
+            { new: true }
+        )
 
         res.status(200).json(updatedPost); //Updating frondend when liked button was clicked
     } catch (err) {

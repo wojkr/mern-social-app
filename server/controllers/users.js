@@ -14,15 +14,17 @@ export const getUser = async (req, res) => {
 export const getUserFriends = async (req, res) => {
     try {
         const { id } = req.params;
-        const user = User.findById(id);        //should i try populate friends array?
+        const user = await User.findById(id);
+
         const friends = await Promise.all(
-            user.friends.map(id => User.findById(id))
+            user.friends.map((id) => User.findById(id))
         );
         const formattedFriends = friends.map(
             ({ _id, firstName, lastName, occupation, location, picturePath }) => {
-                return { _id, firstName, lastName, occupation, location, picturePath }
+                return { _id, firstName, lastName, occupation, location, picturePath };
             }
         );
+        res.status(200).json(formattedFriends);
     } catch (err) {
         res.status(404).json({ message: err.message });
     }
@@ -43,9 +45,9 @@ export const addRemoveFriend = async (req, res) => {
             friend.friends.push(id);
         }
 
-        console.log('Updating user and friend Disabled. In controllers/users.js')
-        // await user.save();
-        // await friend.save();
+        // console.log('Updating user and friend Disabled. In controllers/users.js')
+        await user.save();
+        await friend.save();
 
         const friends = await Promise.all(
             user.friends.map(id => User.findById(id))

@@ -19,13 +19,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
     const main = palette.neutral.main;
     const medium = palette.neutral.medium;
 
-    const isFriend = () => {
-        if (friends && friends.length > 0) {
-            return friends.find((friend) => friend._id === friendId);
-        } else {
-            return false;
-        }
-    }
+    const isFriend = friends.find((friend) => friend._id === friendId);
 
     const patchFriend = async () => {
         const response = await fetch(`http://localhost:3001/users/${_id}/${friendId}`,
@@ -46,12 +40,12 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
             <FlexBetween gap="1rem">
                 <UserImage image={userPicturePath} size="55px" />
                 <Box
-                    onClick={() => {
-                        navigate(`/profile/${friendId}`)
-                        navigate(0)//refreshing page
-                    }}
                 >
                     <Typography
+                        onClick={() => {
+                            navigate(`/profile/${friendId}`)
+                            navigate(0)//refreshing page
+                        }}
                         color={main}
                         variant="h5"
                         fontWeight="500"
@@ -62,6 +56,9 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
                             }
                         }}
                     >
+                        {name}
+                    </Typography >
+                    <Typography color={medium} fontSize="0.75rem">
                         {subtitle}
                     </Typography>
                 </Box>

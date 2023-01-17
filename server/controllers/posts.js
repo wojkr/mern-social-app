@@ -17,8 +17,8 @@ export const createPost = async (req, res) => {
             likes: {},
             comments: []
         })
-        console.log('Creating a new post Disabled. In controllers/posts.js')
-        // await newPost.save();
+        // console.log('Creating a new post Disabled. In controllers/posts.js')
+        await newPost.save();
 
         const post = await Post.find();//getting all posts to send to frondend 
         res.status(201).json(post)
